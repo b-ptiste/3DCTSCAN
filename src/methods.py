@@ -103,14 +103,7 @@ def train(
                 fpr, tpr, roc_auc, best_threshold = compute_roc_curve(
                     vessels_pred[lungs_mask], vessels_ref[lungs_mask]
                 )
-                save_sample(
-                    vessels_pred,
-                    f"/content/output_0{index+1}_train_bf_th_{name}.nii.gz",
-                )
-                save_sample(
-                    (vessels_pred > best_threshold) * 1.0,
-                    f"/content/output_0{index+1}_train_th_{name}.nii.gz",
-                )
+
                 save_sample(
                     (vessels_pred > best_threshold) * lungs_mask * 1.0,
                     f"/content/output_0{index+1}_train_{name}.nii.gz",
