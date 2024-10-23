@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+import seaborn as sns
 
 def plot_ROC(
     list_filter: list[str],
@@ -164,4 +164,59 @@ def plot_roc_curves_val(data: dict, with_only_agg: bool = True):
     plt.title("ROC Curves for Various Filters and Experiments")
     plt.legend(loc="lower right")
     plt.grid(True)
+    plt.show()
+
+
+def plot_confusion_matrix(filter_name: list[str], map_res_val: dict, with_agg: bool):
+    """
+    This function 
+    """
+    
+    name_conf = 'confusion_matrix' if not with_agg else 'confusion_matrix_agg'
+    
+    # Create subplots
+    figure, axes = plt.subplots(1, len(filter_name), figsize=(15, 5))
+
+    # Loop through methods and axes together
+    for ax, name in zip(axes, filter_name):
+        cm = map_res_val[name][name_conf] * 100 / np.sum(map_res_val[name][name_conf])
+
+        # Plot the confusion matrix on the respective axis
+        sns.heatmap(cm, annot=True, fmt='.2f', cmap='Blues', cbar=True, vmin=0.0, vmax=100.0, ax=ax)
+
+        # Add labels and title
+        ax.set_title(f"Confusion Matrix for {name}")
+        ax.set_xlabel('Predicted Labels')
+        ax.set_ylabel('True Labels')
+
+    plt.tight_layout()
+
+    # Show the entire figure with all subplots
+    plt.show()
+
+
+def plot_threshold_relative_error(th_thres, pred_thres, pred_thres_agg, filter_name):
+    plt.figure(figsize=(10, 6))
+    x = list(range(len(filter_name)))
+
+    # Plot the threshold and predicted values
+    plt.plot(x, th_thres, 'bo-', label='threshold', color='blue')
+    plt.plot(x, pred_thres, 'ro-', label='pred_threshold', color='orange')
+    plt.plot(x, pred_thres_agg, 'ro-', label='pred_threshold_agg', color='red')
+    # Add vertical lines and annotate with relative errors
+    for i in range(len(x)):
+        plt.vlines(x[i], pred_thres[i], th_thres[i][0], colors='gray', linestyles='dashed')
+
+        # Calculate relative error
+        rel_error = abs((th_thres[i][0] - pred_thres[i]) / th_thres[i][0]) * 100
+        
+        # Annotate the plot with the relative error next to each line
+        plt.text(x[i], (th_thres[i][0] + pred_thres[i]) / 2, f'{rel_error:.1f}%',
+                ha='center', va='bottom', color='black')
+
+    plt.xticks(x, filter_name)
+    plt.ylabel('Values')
+    plt.legend()
+
+    # Show plot
     plt.show()
