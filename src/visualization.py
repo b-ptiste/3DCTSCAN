@@ -83,19 +83,11 @@ def plot_roc_curves_train(data: dict, with_only_agg: bool = True):
     plt.figure(figsize=(10, 7))
     j = 0
     colors = [
-        "#FF5733",
-        "#33FF57",
-        "#3357FF",
-        "#FF33A1",
-        "#A133FF",
-        "#FF9933",
-        "#33FFF1",
-        "#8D33FF",
-        "#FF5733",
-        "#FF33F4",
-        "#33D4FF",
-        "#FF33B8",
+        "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#A133FF", "#FF9933",
+        "#33FFF1", "#8D33FF", "#FF5733", "#FF33F4", "#33D4FF", "#FF33B8",
+        "#FFD700", "#40E0D0", "#FF4500", "#ADFF2F", "#FF6347", "#FF69B4",
     ]
+    
     for filter_name, experiments in data.items():
         for expe_name, metrics in experiments.items():
             fpr = metrics["fpr_agg"][0]
