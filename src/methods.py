@@ -169,6 +169,7 @@ def val(
             "best_threshold_agg": [],
             "fpr_agg": [],
             "tpr_agg": [],
+            "confusion_matrix_agg": np.array([[0, 0], [0, 0]]),
         }
         for name in filter_name
     }
@@ -206,12 +207,19 @@ def val(
             )
 
             vessels_pred = (vessels_pred > configs[name]["threshold"]) * 1.0
+            vessels_pred_agg = (vessels_pred > configs[name]["threshold_agg"]) * 1.0
 
             ## > Compute confusion metrics
             map_res[name]["confusion_matrix"] = map_res[name][
                 "confusion_matrix"
             ] + confusion_matrix(
                 vessels_ref[lungs_mask].flatten(), vessels_pred[lungs_mask].flatten()
+            )
+            
+            map_res[name]["confusion_matrix_agg"] = map_res[name][
+                "confusion_matrix_agg"
+            ] + confusion_matrix(
+                vessels_ref[lungs_mask].flatten(), vessels_pred_agg[lungs_mask].flatten()
             )
 
             save_sample(
