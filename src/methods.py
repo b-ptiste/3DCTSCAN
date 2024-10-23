@@ -95,7 +95,12 @@ def train(
         ## > Compute the filters
         for config in configs:
             for name in filter_name:
-                vessels_pred = get_filter(name)(vol_ct, **config)
+                if name == "hessian":
+                    _config = config.copy()
+                    _config["black_ridges"] = True
+                    vessels_pred = get_filter(name)(vol_ct, **_config)
+                else:
+                    vessels_pred = get_filter(name)(vol_ct, **config)
 
                 ## > Compute ROC curve and threshold
                 fpr, tpr, roc_auc, best_threshold = compute_roc_curve(
