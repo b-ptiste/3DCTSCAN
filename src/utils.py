@@ -1,5 +1,5 @@
 import numpy as np
-
+import SimpleITK as sitk
 
 def get_stats(map_res_train: dict):
     """
@@ -22,3 +22,16 @@ def get_stats(map_res_train: dict):
                 ]
 
     return map_res_stats
+
+def save_sample(array: np.ndarray, filepath: str):
+    """
+    This function is used to save a numpy array as a .nii.gz file.
+    :param array: numpy array to save
+    :param filepath: path to save the file
+    :return: None
+    """
+    # Convert numpy array back
+    image = sitk.GetImageFromArray(array)
+
+    # Save the image as a .nii.gz file
+    sitk.WriteImage(image, filepath)
