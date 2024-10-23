@@ -9,9 +9,7 @@ from skimage import measure
 from sklearn.metrics import roc_curve, auc, confusion_matrix
 from collections import defaultdict
 from tqdm import tqdm
-from .utils import save_sample 
-
-
+from .utils import save_sample
 
 
 def compute_roc_curve(vesselness: np.ndarray, vessels_ref: np.ndarray):
@@ -208,11 +206,12 @@ def val(
             ] + confusion_matrix(
                 vessels_ref[lungs_mask].flatten(), vessels_pred[lungs_mask].flatten()
             )
-            
+
             map_res[name]["confusion_matrix_agg"] = map_res[name][
                 "confusion_matrix_agg"
             ] + confusion_matrix(
-                vessels_ref[lungs_mask].flatten(), vessels_pred_agg[lungs_mask].flatten()
+                vessels_ref[lungs_mask].flatten(),
+                vessels_pred_agg[lungs_mask].flatten(),
             )
 
             save_sample(

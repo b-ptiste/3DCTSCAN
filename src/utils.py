@@ -1,6 +1,7 @@
 import numpy as np
 import SimpleITK as sitk
 
+
 def get_stats(map_res_train: dict):
     """
     This function is used to get the statistics of the model.
@@ -22,6 +23,7 @@ def get_stats(map_res_train: dict):
                 ]
 
     return map_res_stats
+
 
 def save_sample(array: np.ndarray, filepath: str):
     """

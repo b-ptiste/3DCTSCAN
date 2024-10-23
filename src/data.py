@@ -7,6 +7,7 @@ from skimage import measure
 
 from .utils import save_sample
 
+
 class Dataset(torch.utils.data.Dataset):
     """
     This class is used to load the dataset of CT scans.
