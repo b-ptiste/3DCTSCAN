@@ -42,6 +42,7 @@ def plot_res(
     list_means: list[float],
     list_stds: list[float],
     _type: list[str],
+    params: list[str],
 ):
     """
     This function is used to plot the results.
@@ -49,8 +50,9 @@ def plot_res(
     :param list_means: list of means
     :param list_stds: list of stds
     :param _type: type of the plot
+    :param params: list of parameters
     """
-    x = np.arange(len(list_filter))
+    x = np.arange(len(params))
 
     fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -61,7 +63,7 @@ def plot_res(
 
     # Customize plot
     ax.set_xticks(x)
-    ax.set_xticklabels(list_filter)
+    ax.set_xticklabels(params)
     ax.set_xlabel("Parameters")
     ax.set_ylabel(f"{_type}")
     ax.set_title(f"Comparison of {_type} Mean and Standard Deviation by Method")
