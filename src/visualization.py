@@ -137,6 +137,8 @@ def plot_roc_curves_val(data: dict, with_only_agg: bool = True):
             color = "red"
         elif filter_name == "meijering":
             color = "green"
+        elif filter_name == "hessian":
+            color = "orange"
 
         fpr = metrics["fpr_agg"][0]
         tpr = metrics["tpr_agg"][0]
