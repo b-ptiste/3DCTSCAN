@@ -169,7 +169,9 @@ def plot_roc_curves_val(data: dict, with_only_agg: bool = True):
 
 def plot_confusion_matrix(filter_name: list[str], map_res_val: dict, with_agg: bool):
     """
-    This function 
+    This function is used to plot the confusion matrix 
+    :param filter_name: list of filter names
+    :param map_res_val: dict
     """
     
     name_conf = 'confusion_matrix' if not with_agg else 'confusion_matrix_agg'
@@ -195,7 +197,14 @@ def plot_confusion_matrix(filter_name: list[str], map_res_val: dict, with_agg: b
     plt.show()
 
 
-def plot_threshold_relative_error(th_thres, pred_thres, pred_thres_agg, filter_name):
+def plot_threshold_relative_error(th_thres: list[float], pred_thres: list[float], pred_thres_agg: list[float], filter_name: list[str]):
+    """
+    This function is used to plot the threshold relative error.
+    :param th_thres: list of threshold
+    :param pred_thres: list of predicted threshold
+    :param pred_thres_agg: list of predicted threshold aggregated
+    :param filter_name: list of filter names
+    """
     plt.figure(figsize=(10, 6))
     x = list(range(len(filter_name)))
 
