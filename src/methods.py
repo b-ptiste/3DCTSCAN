@@ -222,6 +222,10 @@ def val(
             save_sample(
                 _vessels_pred * lungs_mask, f"/content/output_0{index+1}_{name}.nii.gz"
             )
+            
+            save_sample(
+                vessels_pred_agg * lungs_mask, f"/content/output_0{index+1}_{name}_agg.nii.gz"
+            )
     for name in filter_name:
         fpr, tpr, roc_auc_agg, best_threshold_agg = compute_roc_curve(
             np.array(map_res[name]["pred_stack"]),
