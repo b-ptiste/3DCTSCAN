@@ -17,8 +17,8 @@ def get_stats(map_res_train: dict):
                 if k3 in ["roc_auc", "best_threshold"]:
                     map_res_stats[k1][k2][f"{k3}_mean"] = np.mean(v3)
                     map_res_stats[k1][k2][f"{k3}_std"] = np.std(v3)
-                map_res_stats[k1][k2]["roc_auc_aug"] = v2["roc_auc_agg"][0]
-                map_res_stats[k1][k2]["best_threshold_aug"] = v2["best_threshold_agg"][
+                map_res_stats[k1][k2]["roc_auc_agg"] = v2["roc_auc_agg"][0]
+                map_res_stats[k1][k2]["best_threshold_agg"] = v2["best_threshold_agg"][
                     0
                 ]
 
