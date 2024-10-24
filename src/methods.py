@@ -202,14 +202,16 @@ def val(
                 vessels_ref[lungs_mask]
             )
 
-            vessels_pred = (vessels_pred > configs[name]["threshold"]) * 1.0
+            _vessels_pred = (vessels_pred > configs[name]["threshold"]) * 1.0
             vessels_pred_agg = (vessels_pred > configs[name]["threshold_agg"]) * 1.0
 
+            print(configs[name]["threshold"])
+            print(configs[name]["threshold_agg"])
             ## > Compute confusion metrics
             map_res[name]["confusion_matrix"] = map_res[name][
                 "confusion_matrix"
             ] + confusion_matrix(
-                vessels_ref[lungs_mask].flatten(), vessels_pred[lungs_mask].flatten()
+                vessels_ref[lungs_mask].flatten(), _vessels_pred[lungs_mask].flatten()
             )
 
             map_res[name]["confusion_matrix_agg"] = map_res[name][
@@ -220,7 +222,7 @@ def val(
             )
 
             save_sample(
-                vessels_pred * lungs_mask, f"/content/output_0{index+1}_{name}.nii.gz"
+                _vessels_pred * lungs_mask, f"/content/output_0{index+1}_{name}.nii.gz"
             )
         for name in filter_name:
             fpr, tpr, roc_auc_agg, best_threshold_agg = compute_roc_curve(
