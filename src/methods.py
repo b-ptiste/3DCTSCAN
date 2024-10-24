@@ -223,12 +223,12 @@ def val(
                 vessels_pred * lungs_mask, f"/content/output_0{index+1}_{name}.nii.gz"
             )
         for name in filter_name:
-            fpr, tpr, roc_auc, best_threshold = compute_roc_curve(
+            fpr, tpr, roc_auc_agg, best_threshold_agg = compute_roc_curve(
                 np.array(map_res[name]["pred_stack"]),
                 np.array(map_res[name]["ref_stack"]),
             )
-            map_res[name]["roc_auc_agg"].append(roc_auc)
-            map_res[name]["best_threshold_agg"].append(best_threshold)
+            map_res[name]["roc_auc_agg"].append(roc_auc_agg)
+            map_res[name]["best_threshold_agg"].append(best_threshold_agg)
             map_res[name]["fpr_agg"].append(fpr)
             map_res[name]["tpr_agg"].append(tpr)
     return map_res
