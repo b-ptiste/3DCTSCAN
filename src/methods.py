@@ -205,8 +205,6 @@ def val(
             _vessels_pred = (vessels_pred > configs[name]["threshold"]) * 1.0
             vessels_pred_agg = (vessels_pred > configs[name]["threshold_agg"]) * 1.0
 
-            print(configs[name]["threshold"])
-            print(configs[name]["threshold_agg"])
             ## > Compute confusion metrics
             map_res[name]["confusion_matrix"] = map_res[name][
                 "confusion_matrix"
