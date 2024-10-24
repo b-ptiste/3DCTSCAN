@@ -55,14 +55,13 @@ def plot_res(
     """
     x = np.arange(len(params))
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    _, ax = plt.subplots(figsize=(10, 6))
 
     for i, method in enumerate(list_filter):
         ax.errorbar(
             x, list_means[i], yerr=list_stds[i], label=method, fmt="-o", capsize=5
         )
 
-    # Customize plot
     ax.set_xticks(x)
     ax.set_xticklabels(params)
     ax.set_xlabel("Parameters")
@@ -83,11 +82,26 @@ def plot_roc_curves_train(data: dict, with_only_agg: bool = True):
     plt.figure(figsize=(10, 7))
     j = 0
     colors = [
-        "#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#A133FF", "#FF9933",
-        "#33FFF1", "#8D33FF", "#FF5733", "#FF33F4", "#33D4FF", "#FF33B8",
-        "#FFD700", "#40E0D0", "#FF4500", "#ADFF2F", "#FF6347", "#FF69B4",
+        "#FF5733",
+        "#33FF57",
+        "#3357FF",
+        "#FF33A1",
+        "#A133FF",
+        "#FF9933",
+        "#33FFF1",
+        "#8D33FF",
+        "#FF5733",
+        "#FF33F4",
+        "#33D4FF",
+        "#FF33B8",
+        "#FFD700",
+        "#40E0D0",
+        "#FF4500",
+        "#ADFF2F",
+        "#FF6347",
+        "#FF69B4",
     ]
-    
+
     for filter_name, experiments in data.items():
         for expe_name, metrics in experiments.items():
             fpr = metrics["fpr_agg"][0]
@@ -125,7 +139,6 @@ def plot_roc_curves_val(data: dict, with_only_agg: bool = True):
     plt.figure(figsize=(10, 7))
 
     for filter_name, metrics in data.items():
-        print(filter_name)
         if filter_name == "frangi":
             color = "blue"
         elif filter_name == "sato":
@@ -194,8 +207,6 @@ def plot_confusion_matrix(filter_name: list[str], map_res_val: dict, with_agg: b
         ax.set_ylabel("True Labels")
 
     plt.tight_layout()
-
-    # Show the entire figure with all subplots
     plt.show()
 
 
@@ -228,7 +239,6 @@ def plot_threshold_relative_error(
         # Calculate relative error
         rel_error = abs((th_thres[i][0] - pred_thres[i]) / th_thres[i][0]) * 100
 
-        # Annotate the plot with the relative error next to each line
         plt.text(
             x[i],
             (th_thres[i][0] + pred_thres[i]) / 2,
